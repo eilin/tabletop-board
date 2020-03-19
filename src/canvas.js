@@ -11,6 +11,7 @@ class Canvas extends Component {
 		this.pusher = new Pusher('c91485ea4b39d895b9d5', {
 			cluster: 'us2',
 		});
+		this.boardApiUrl = process.env.REACT_APP_PAINT_URL || 'http://localhost:4000/paint'
 	}
 
 	isPainting = false;
@@ -86,7 +87,8 @@ class Canvas extends Component {
 			userId: this.userId,
 		};
 		// We use the native fetch API to make requests to the server
-		const req = await fetch('http://localhost:4000/paint', {
+		console.log("POST " + this.boardApiUrl);
+		const req = await fetch(this.boardApiUrl, {
 			method: 'post',
 			body: JSON.stringify(body),
 			headers: {
