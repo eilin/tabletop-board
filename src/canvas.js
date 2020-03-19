@@ -48,6 +48,23 @@ class Canvas extends Component {
 			this.sendPaintData();
 		}
 	}
+	drawBoard() {
+		let tileSize = 40;
+		let n = 10;
+		let p = 0;
+		//draw verticals
+		for (let i = 0; i <= n; i++) {
+			this.ctx.moveTo(p + i * tileSize, p);
+			this.ctx.lineTo(p + i * tileSize, n * tileSize + p);
+		}
+		//draw horizontals
+		for (let i = 0; i <= n; i++) {
+			this.ctx.moveTo(p, p + i * tileSize);
+			this.ctx.lineTo(n * tileSize + p, p + i * tileSize);
+		}
+		this.ctx.strokeStyle = "lightgrey";
+		this.ctx.stroke();
+	}
 	paint(prevPos, currPos, strokeStyle) {
 		const { offsetX, offsetY } = currPos;
 		const { offsetX: x, offsetY: y } = prevPos;
@@ -97,6 +114,7 @@ class Canvas extends Component {
 				});
 			}
 		});
+		this.drawBoard();
 	}
 
 	render() {
